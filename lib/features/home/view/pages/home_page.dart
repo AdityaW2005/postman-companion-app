@@ -5,6 +5,7 @@ import 'package:postman/features/home/view/widgets/delivery_stat_card.dart';
 import 'package:postman/features/home/view/widgets/delivery_task_card.dart';
 import 'package:postman/features/home/view/widgets/quick_action_button.dart';
 import 'package:postman/features/home/view/widgets/route_info_card.dart';
+import 'package:postman/features/home/view/pages/live_map_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -253,7 +254,11 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                       onViewRoute: () {
-                        // Open map view
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => const LiveMapPage(),
+                          ),
+                        );
                       },
                     ),
                   ),
