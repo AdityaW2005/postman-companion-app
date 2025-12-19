@@ -56,10 +56,7 @@ class _FindPostmanPageState extends State<FindPostmanPage>
         child: Stack(
           children: [
             Positioned.fill(
-              child: _MapMock(
-                progress: _controller,
-                showRoute: true,
-              ),
+              child: _MapMock(progress: _controller, showRoute: true),
             ),
 
             // Recenter button
@@ -75,10 +72,7 @@ class _FindPostmanPageState extends State<FindPostmanPage>
             ),
 
             // Bottom sheet
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: _TrackingSheet(),
-            ),
+            Align(alignment: Alignment.bottomCenter, child: _TrackingSheet()),
           ],
         ),
       ),
@@ -251,8 +245,9 @@ class _TrackingSheet extends StatelessWidget {
                               Text(
                                 'On route with your parcel',
                                 style: theme.textTheme.bodySmall?.copyWith(
-                                  color: theme.colorScheme.onSurface
-                                      .withValues(alpha: 0.65),
+                                  color: theme.colorScheme.onSurface.withValues(
+                                    alpha: 0.65,
+                                  ),
                                 ),
                               ),
                             ],
@@ -291,8 +286,9 @@ class _TrackingSheet extends StatelessWidget {
                             Text(
                               'Registered',
                               style: theme.textTheme.labelLarge?.copyWith(
-                                color: theme.colorScheme.onSurface
-                                    .withValues(alpha: 0.7),
+                                color: theme.colorScheme.onSurface.withValues(
+                                  alpha: 0.7,
+                                ),
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
@@ -442,8 +438,9 @@ class _TimelineRow extends StatelessWidget {
                     Text(
                       event.time,
                       style: theme.textTheme.bodySmall?.copyWith(
-                        color: theme.colorScheme.onSurface
-                            .withValues(alpha: 0.6),
+                        color: theme.colorScheme.onSurface.withValues(
+                          alpha: 0.6,
+                        ),
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -454,8 +451,9 @@ class _TimelineRow extends StatelessWidget {
                   Text(
                     event.subtitle!,
                     style: theme.textTheme.bodySmall?.copyWith(
-                      color: theme.colorScheme.onSurface
-                          .withValues(alpha: 0.65),
+                      color: theme.colorScheme.onSurface.withValues(
+                        alpha: 0.65,
+                      ),
                     ),
                   ),
                 ],
@@ -729,10 +727,7 @@ class _MapMock extends StatelessWidget {
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: theme.colorScheme.primaryContainer,
-          border: Border.all(
-            color: theme.colorScheme.surface,
-            width: 3,
-          ),
+          border: Border.all(color: theme.colorScheme.surface, width: 3),
         ),
         child: Icon(
           Icons.inventory_2_outlined,
@@ -752,10 +747,7 @@ class _MapMock extends StatelessWidget {
 
     final a = points[seg];
     final b = points[seg + 1];
-    return Offset(
-      a.dx + (b.dx - a.dx) * localT,
-      a.dy + (b.dy - a.dy) * localT,
-    );
+    return Offset(a.dx + (b.dx - a.dx) * localT, a.dy + (b.dy - a.dy) * localT);
   }
 }
 
@@ -785,10 +777,7 @@ class _UserLocationDot extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: theme.colorScheme.primary,
-            border: Border.all(
-              color: theme.colorScheme.surface,
-              width: 2,
-            ),
+            border: Border.all(color: theme.colorScheme.surface, width: 2),
           ),
         ),
       ],
@@ -824,10 +813,7 @@ class _PostmanMarker extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: theme.colorScheme.secondaryContainer,
-            border: Border.all(
-              color: theme.colorScheme.surface,
-              width: 3,
-            ),
+            border: Border.all(color: theme.colorScheme.surface, width: 3),
           ),
           child: Icon(
             Icons.local_shipping_outlined,
