@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:postman/core/common/widgets/bottom_nav_bar.dart';
+import 'package:postman/core/theme/app_theme.dart';
+import 'package:postman/core/theme/app_theme_enum.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -12,8 +14,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Postman',
-      theme: ThemeData.light(),
+      theme: getThemeData(appTheme: AppTheme.blue, isDarkMode: false),
       home: const BottomNavBar(),
     );
   }
