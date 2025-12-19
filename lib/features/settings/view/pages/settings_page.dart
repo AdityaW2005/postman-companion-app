@@ -16,8 +16,6 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   bool _isOnDuty = true;
   bool _notificationsEnabled = true;
-  bool _locationTracking = true;
-  bool _autoRouteOptimization = true;
   bool _vibrationAlerts = true;
   bool _darkMode = false;
 
@@ -313,7 +311,7 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               CircleAvatar(
                 radius: 36,
-                backgroundColor: theme.colorScheme.primaryContainer,
+                backgroundColor: theme.colorScheme.surfaceContainerLow,
                 child: Text(
                   'PS',
                   style: theme.textTheme.headlineSmall?.copyWith(
@@ -360,7 +358,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: theme.colorScheme.primaryContainer,
+                        color: theme.colorScheme.surfaceContainer,
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
@@ -389,9 +387,7 @@ class _SettingsPageState extends State<SettingsPage> {
             },
             icon: Icon(Iconsax.edit_2, color: theme.colorScheme.primary),
             style: IconButton.styleFrom(
-              backgroundColor: theme.colorScheme.primaryContainer.withValues(
-                alpha: 0.5,
-              ),
+              backgroundColor: theme.colorScheme.surfaceContainerHighest,
             ),
           ),
         ],
@@ -477,7 +473,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  void _showMapsAppPicker(BuildContext context) {
+  void _showLanguagePicker(BuildContext context) {
     final theme = Theme.of(context);
 
     showModalBottomSheet(
@@ -502,15 +498,18 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 24),
             Text(
-              'Choose Maps App',
+              'Choose Language',
               style: theme.textTheme.titleLarge?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             const SizedBox(height: 16),
-            _buildMapOption(context, 'Google Maps', true),
-            _buildMapOption(context, 'Apple Maps', false),
-            _buildMapOption(context, 'Waze', false),
+            _buildLanguageOption(context, 'English', 'English', true),
+            _buildLanguageOption(context, 'हिंदी', 'Hindi', false),
+            _buildLanguageOption(context, 'தமிழ்', 'Tamil', false),
+            _buildLanguageOption(context, 'తెలుగు', 'Telugu', false),
+            _buildLanguageOption(context, 'ಕನ್ನಡ', 'Kannada', false),
+            _buildLanguageOption(context, 'മലയാളം', 'Malayalam', false),
             const SizedBox(height: 16),
           ],
         ),
@@ -518,11 +517,17 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildMapOption(BuildContext context, String name, bool isSelected) {
+  Widget _buildLanguageOption(
+    BuildContext context,
+    String name,
+    String subtitle,
+    bool isSelected,
+  ) {
     final theme = Theme.of(context);
 
     return ListTile(
       title: Text(name),
+      subtitle: Text(subtitle),
       trailing: isSelected
           ? Icon(Iconsax.tick_circle, color: theme.colorScheme.primary)
           : null,
@@ -619,96 +624,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ],
           ],
         ),
-      ),
-    );
-  }
-
-  void _showLanguagePicker(BuildContext context) {
-    final theme = Theme.of(context);
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (context) => Container(
-        decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
-        ),
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: theme.colorScheme.outlineVariant,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            const SizedBox(height: 24),
-            Text(
-              'Choose Language',
-              style: theme.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 16),
-            _buildLanguageOption(context, 'English', 'English', true),
-            _buildLanguageOption(context, 'हिंदी', 'Hindi', false),
-            _buildLanguageOption(context, 'தமிழ்', 'Tamil', false),
-            _buildLanguageOption(context, 'తెలుగు', 'Telugu', false),
-            _buildLanguageOption(context, 'ಕನ್ನಡ', 'Kannada', false),
-            _buildLanguageOption(context, 'മലയാളം', 'Malayalam', false),
-            const SizedBox(height: 16),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLanguageOption(
-    BuildContext context,
-    String name,
-    String subtitle,
-    bool isSelected,
-  ) {
-    final theme = Theme.of(context);
-
-    return ListTile(
-      title: Text(name),
-      subtitle: Text(subtitle),
-      trailing: isSelected
-          ? Icon(Iconsax.tick_circle, color: theme.colorScheme.primary)
-          : null,
-      onTap: () => Navigator.pop(context),
-    );
-  }
-
-  void _showClearCacheDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Clear Cache'),
-        content: const Text(
-          'This will clear all cached data including images and temporary files. This won\'t affect your saved deliveries.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () {
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Cache cleared successfully')),
-              );
-            },
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('Clear'),
-          ),
-        ],
       ),
     );
   }
